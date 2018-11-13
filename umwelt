@@ -63,7 +63,7 @@ elif [[ "${1}" == "enter" ]]; then
     for file in "${@}"; do
         envpath="${UMWELT_ENVS_DIR}/${file}"
         [[ -e "${envpath}" ]] || fail "environment ${file} does not exist"
-        while IFS= read -r line; do
+        while IFS= read -r line || [[ -n "$line" ]]; do
             [[ -z "${line// }" ]] && continue
             paths=("$line" "${paths[@]}")
         done < "${envpath}"
